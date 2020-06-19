@@ -7,25 +7,81 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+load('Results.RData')
 ```
 
-## R Markdown
-This is my project.
+## Definition of the project
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+The objective of the project is to predict how well weigth
+lifting exercise is performed using a dataset from 
+http://groupware.les.inf.puc-rio.br/har. The dataset consists
+of a sample of 19,622 observations with 159 features related.
+The response variable (classe) is a categorical variable 
+with 5 levels.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Feature selection
 
-```{r cars}
-summary(cars)
+I kept only the numerical variables with no missing observations.
+I also removed the raw_timestamp_part_1, raw_timestamp_part_2
+and num_window variables. My final dataset consists of 52 variables 
+in addition the response variable.
+
+## Data partitioning
+
+The dataset was split into 3 subsets:
+- Training dataset (60%)
+- Testing dataset (20%)
+- Validation set (20%)
+
+## Cross-validation
+
+I used K-fold cross-validation with 5 folds.
+
+## Models
+
+Using the caret package, I trained two models: 
+Random Forests and Gradient Boosting Machines
+
+## Results
+
+### 1. Random Forests
+
+Confussion matrix:
+
+```{r, echo=FALSE}
+tab_rf
+```
+Test accuracy:
+```{r, echo=FALSE}
+acc_rf
+```
+### 2. Gradient Boosting Machines
+
+Confussion matrix:
+
+```{r, echo=FALSE}
+tab_gbm
+```
+Test accuracy:
+```{r, echo=FALSE}
+acc_gbm
 ```
 
-## Including Plots
+## Best model
 
-You can also embed plots, for example:
+The resuls from the Random Forests model are slightly better than those
+from the Gradient Boosting Machines. 
+The more important variables in the prediction are roll_belt and yaw_belt.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+Variables importance with Random Forests:
+```{r, echo=FALSE}
+fig
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Expected out of sample error
+
+The accuracy of the Random Forests model in the validation set is:
+
+```{r, echo=FALSE}
+acc_out
+```
