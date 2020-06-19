@@ -7,7 +7,10 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-load('Results.RData')
+library(dplyr)
+library(caret)
+library(ggplot2)
+options(warn=-1)
 ```
 
 ## Definition of the project
@@ -26,6 +29,21 @@ I also removed the raw_timestamp_part_1, raw_timestamp_part_2
 and num_window variables. My final dataset consists of 52 variables 
 in addition the response variable.
 
+```{r, echo=TRUE}
+# Loading data
+plm_train <- read.csv('pml-training.csv')
+plm_test <- read.csv('pml-testing.csv')
+# Cleaning data
+classe <- plm_train %>% 
+  select(X, classe)
+plm_train <- plm_train %>% 
+  select(-classe) %>% 
+  mutate_if(is.factor, function(x)as.numeric(as.character(x))) %>% 
+  select_if(~!any(is.na(.))) %>% 
+  left_join(classe, by = 'X') %>% 
+  select(-raw_timestamp_part_1, -raw_timestamp_part_2,-X,-num_window)
+```
+
 ## Data partitioning
 
 The dataset was split into 3 subsets:
@@ -33,21 +51,52 @@ The dataset was split into 3 subsets:
 - Testing dataset (20%)
 - Validation set (20%)
 
+```{r, echo=TRUE}
+# Spliting data
+
+set.seed(1234)
+inTrain <- createDataPartition(plm_train %>% pull(classe), p = 0.6, list = F)
+training <- plm_train[inTrain,]
+noTraining <- plm_train[-inTrain,]
+inTest <- createDataPartition(noTraining %>% pull(classe), p = 0.5, list = F)
+testing <- noTraining[inTest,]
+validation <- noTraining[-inTest,]
+
+```
+
 ## Cross-validation
 
 I used K-fold cross-validation with 5 folds.
+
+```{r, echo=TRUE}
+# Parameter to be used in the train function
+ctrl <- trainControl(method = 'cv', number = 5, verboseIter = FALSE)
+```
 
 ## Models
 
 Using the caret package, I trained two models: 
 Random Forests and Gradient Boosting Machines
 
+```{r, echo=TRUE}
+# Training models
+set.seed(5678)
+ctrl <- trainControl(method = 'cv', number = 5)
+model_rf <- train(classe ~ ., method = 'rf',data = training,trControl = ctrl)
+model_gbm <- train(classe ~ ., method = 'gbm',data = training,trControl = ctrl)
+```
+
 ## Results
 
 ### 1. Random Forests
 
+```{r, echo=TRUE}
+pred_rf <- predict(model_rf, testing)
+matrix_rf <- confusionMatrix(testing$classe, pred_rf)
+tab_rf <- matrix_rf$table
+acc_rf <- matrix_rf$overall[1]
+```
 Confussion matrix:
-
 ```{r, echo=FALSE}
 tab_rf
 ```
@@ -57,8 +106,13 @@ acc_rf
 ```
 ### 2. Gradient Boosting Machines
 
+```{r, echo=TRUE}
+pred_gbm <- predict(model_gbm, testing)
+matrix_gbm <- confusionMatrix(testing$classe, pred_gbm)
+tab_gbm <- matrix_gbm$table
+acc_gbm <- matrix_gbm$overall[1]
+```
 Confussion matrix:
-
 ```{r, echo=FALSE}
 tab_gbm
 ```
@@ -69,12 +123,30 @@ acc_gbm
 
 ## Best model
 
-The resuls from the Random Forests model are slightly better than those
+The resuls from the Random Forests model are better than those
 from the Gradient Boosting Machines. 
 The most important variables in the prediction are roll_belt and yaw_belt.
 
+```{r, echo=TRUE}
+# Var importance
+imp_rf <- varImp(model_rf)$importance
+```
+
 Variables importance with Random Forests:
 ```{r, echo=FALSE}
+imp_rf <- imp_rf %>% 
+  mutate(Variable = rownames(.)) %>% 
+  arrange(desc(Overall)) %>% 
+  filter(row_number()<=10)
+
+fig <- ggplot(aes(y = Variable, x = Overall), data = imp_rf %>% 
+         mutate(Variable = factor(Variable, levels = imp_rf %>% 
+                                    arrange(Overall) %>% 
+                                    pull(Variable)))) + 
+  geom_bar(stat = 'identity', fill = 'cornflowerblue') +
+  xlab('Importance') + 
+  ylab('Feature') + 
+  theme_classic()
 fig
 ```
 
@@ -82,6 +154,19 @@ fig
 
 The accuracy of the Random Forests model in the validation set is:
 
+```{r, echo=TRUE}
+# Validation
+pred_out <- predict(model_rf, validation)
+matrix_out <- confusionMatrix(validation$classe, pred_out)
+acc_out <- matrix_out$overall[1]
+```
+
 ```{r, echo=FALSE}
 acc_out
+```
+## Test sample prediction
+The prediction for the testing dataset using the Random Forests model is:
+
+```{r, echo=TRUE}
+predict(model_rf, plm_test)
 ```
