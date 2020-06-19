@@ -237,326 +237,7 @@ ctrl &lt;- trainControl(method = 'cv', number = 5, verboseIter = FALSE)</code></
 set.seed(5678)
 ctrl &lt;- trainControl(method = 'cv', number = 5)
 model_rf &lt;- train(classe ~ ., method = 'rf',data = training,trControl = ctrl)
-model_gbm &lt;- train(classe ~ ., method = 'gbm',data = training,trControl = ctrl)</code></pre>
-<pre><code>## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.1269
-##      2        1.5224             nan     0.1000    0.0854
-##      3        1.4639             nan     0.1000    0.0670
-##      4        1.4194             nan     0.1000    0.0547
-##      5        1.3837             nan     0.1000    0.0495
-##      6        1.3506             nan     0.1000    0.0391
-##      7        1.3246             nan     0.1000    0.0411
-##      8        1.2988             nan     0.1000    0.0353
-##      9        1.2766             nan     0.1000    0.0293
-##     10        1.2576             nan     0.1000    0.0315
-##     20        1.1018             nan     0.1000    0.0145
-##     40        0.9273             nan     0.1000    0.0090
-##     60        0.8218             nan     0.1000    0.0056
-##     80        0.7427             nan     0.1000    0.0044
-##    100        0.6795             nan     0.1000    0.0050
-##    120        0.6273             nan     0.1000    0.0023
-##    140        0.5812             nan     0.1000    0.0033
-##    150        0.5607             nan     0.1000    0.0024
-## 
-## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.1873
-##      2        1.4882             nan     0.1000    0.1327
-##      3        1.4038             nan     0.1000    0.1022
-##      4        1.3377             nan     0.1000    0.0802
-##      5        1.2856             nan     0.1000    0.0746
-##      6        1.2390             nan     0.1000    0.0585
-##      7        1.2001             nan     0.1000    0.0561
-##      8        1.1646             nan     0.1000    0.0591
-##      9        1.1280             nan     0.1000    0.0482
-##     10        1.0976             nan     0.1000    0.0452
-##     20        0.8911             nan     0.1000    0.0227
-##     40        0.6853             nan     0.1000    0.0120
-##     60        0.5559             nan     0.1000    0.0048
-##     80        0.4669             nan     0.1000    0.0051
-##    100        0.3997             nan     0.1000    0.0025
-##    120        0.3455             nan     0.1000    0.0021
-##    140        0.3027             nan     0.1000    0.0022
-##    150        0.2831             nan     0.1000    0.0017
-## 
-## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.2317
-##      2        1.4621             nan     0.1000    0.1657
-##      3        1.3566             nan     0.1000    0.1179
-##      4        1.2784             nan     0.1000    0.1001
-##      5        1.2143             nan     0.1000    0.0960
-##      6        1.1531             nan     0.1000    0.0736
-##      7        1.1062             nan     0.1000    0.0700
-##      8        1.0619             nan     0.1000    0.0629
-##      9        1.0218             nan     0.1000    0.0600
-##     10        0.9844             nan     0.1000    0.0424
-##     20        0.7556             nan     0.1000    0.0297
-##     40        0.5295             nan     0.1000    0.0106
-##     60        0.4008             nan     0.1000    0.0071
-##     80        0.3218             nan     0.1000    0.0034
-##    100        0.2622             nan     0.1000    0.0034
-##    120        0.2205             nan     0.1000    0.0023
-##    140        0.1816             nan     0.1000    0.0014
-##    150        0.1686             nan     0.1000    0.0010
-## 
-## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.1282
-##      2        1.5230             nan     0.1000    0.0894
-##      3        1.4655             nan     0.1000    0.0683
-##      4        1.4201             nan     0.1000    0.0538
-##      5        1.3840             nan     0.1000    0.0518
-##      6        1.3508             nan     0.1000    0.0386
-##      7        1.3236             nan     0.1000    0.0402
-##      8        1.2975             nan     0.1000    0.0340
-##      9        1.2759             nan     0.1000    0.0349
-##     10        1.2536             nan     0.1000    0.0267
-##     20        1.0987             nan     0.1000    0.0188
-##     40        0.9286             nan     0.1000    0.0086
-##     60        0.8246             nan     0.1000    0.0062
-##     80        0.7435             nan     0.1000    0.0052
-##    100        0.6821             nan     0.1000    0.0035
-##    120        0.6315             nan     0.1000    0.0038
-##    140        0.5864             nan     0.1000    0.0018
-##    150        0.5672             nan     0.1000    0.0022
-## 
-## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.1929
-##      2        1.4858             nan     0.1000    0.1293
-##      3        1.4027             nan     0.1000    0.1017
-##      4        1.3366             nan     0.1000    0.0815
-##      5        1.2837             nan     0.1000    0.0654
-##      6        1.2405             nan     0.1000    0.0730
-##      7        1.1949             nan     0.1000    0.0534
-##      8        1.1593             nan     0.1000    0.0475
-##      9        1.1277             nan     0.1000    0.0522
-##     10        1.0950             nan     0.1000    0.0384
-##     20        0.8958             nan     0.1000    0.0209
-##     40        0.6848             nan     0.1000    0.0104
-##     60        0.5520             nan     0.1000    0.0079
-##     80        0.4630             nan     0.1000    0.0043
-##    100        0.3978             nan     0.1000    0.0030
-##    120        0.3462             nan     0.1000    0.0034
-##    140        0.3058             nan     0.1000    0.0016
-##    150        0.2882             nan     0.1000    0.0011
-## 
-## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.2349
-##      2        1.4618             nan     0.1000    0.1671
-##      3        1.3558             nan     0.1000    0.1200
-##      4        1.2806             nan     0.1000    0.0965
-##      5        1.2166             nan     0.1000    0.0952
-##      6        1.1568             nan     0.1000    0.0766
-##      7        1.1082             nan     0.1000    0.0687
-##      8        1.0649             nan     0.1000    0.0555
-##      9        1.0289             nan     0.1000    0.0590
-##     10        0.9911             nan     0.1000    0.0563
-##     20        0.7550             nan     0.1000    0.0212
-##     40        0.5316             nan     0.1000    0.0124
-##     60        0.4020             nan     0.1000    0.0071
-##     80        0.3191             nan     0.1000    0.0064
-##    100        0.2621             nan     0.1000    0.0029
-##    120        0.2201             nan     0.1000    0.0028
-##    140        0.1887             nan     0.1000    0.0027
-##    150        0.1738             nan     0.1000    0.0008
-## 
-## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.1225
-##      2        1.5233             nan     0.1000    0.0881
-##      3        1.4638             nan     0.1000    0.0692
-##      4        1.4177             nan     0.1000    0.0522
-##      5        1.3817             nan     0.1000    0.0503
-##      6        1.3490             nan     0.1000    0.0392
-##      7        1.3231             nan     0.1000    0.0409
-##      8        1.2971             nan     0.1000    0.0319
-##      9        1.2758             nan     0.1000    0.0305
-##     10        1.2553             nan     0.1000    0.0271
-##     20        1.0995             nan     0.1000    0.0157
-##     40        0.9300             nan     0.1000    0.0091
-##     60        0.8239             nan     0.1000    0.0064
-##     80        0.7435             nan     0.1000    0.0042
-##    100        0.6827             nan     0.1000    0.0040
-##    120        0.6319             nan     0.1000    0.0026
-##    140        0.5883             nan     0.1000    0.0021
-##    150        0.5683             nan     0.1000    0.0025
-## 
-## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.1905
-##      2        1.4865             nan     0.1000    0.1295
-##      3        1.4049             nan     0.1000    0.1059
-##      4        1.3357             nan     0.1000    0.0823
-##      5        1.2820             nan     0.1000    0.0690
-##      6        1.2384             nan     0.1000    0.0644
-##      7        1.1966             nan     0.1000    0.0546
-##      8        1.1619             nan     0.1000    0.0578
-##      9        1.1255             nan     0.1000    0.0379
-##     10        1.0988             nan     0.1000    0.0420
-##     20        0.8959             nan     0.1000    0.0276
-##     40        0.6780             nan     0.1000    0.0095
-##     60        0.5543             nan     0.1000    0.0080
-##     80        0.4667             nan     0.1000    0.0050
-##    100        0.4005             nan     0.1000    0.0041
-##    120        0.3437             nan     0.1000    0.0030
-##    140        0.2999             nan     0.1000    0.0020
-##    150        0.2837             nan     0.1000    0.0026
-## 
-## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.2372
-##      2        1.4586             nan     0.1000    0.1658
-##      3        1.3545             nan     0.1000    0.1257
-##      4        1.2733             nan     0.1000    0.0986
-##      5        1.2106             nan     0.1000    0.0925
-##      6        1.1503             nan     0.1000    0.0747
-##      7        1.1019             nan     0.1000    0.0577
-##      8        1.0618             nan     0.1000    0.0704
-##      9        1.0206             nan     0.1000    0.0504
-##     10        0.9879             nan     0.1000    0.0475
-##     20        0.7570             nan     0.1000    0.0303
-##     40        0.5350             nan     0.1000    0.0111
-##     60        0.4074             nan     0.1000    0.0081
-##     80        0.3226             nan     0.1000    0.0066
-##    100        0.2655             nan     0.1000    0.0021
-##    120        0.2196             nan     0.1000    0.0012
-##    140        0.1867             nan     0.1000    0.0009
-##    150        0.1727             nan     0.1000    0.0018
-## 
-## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.1239
-##      2        1.5232             nan     0.1000    0.0884
-##      3        1.4632             nan     0.1000    0.0657
-##      4        1.4176             nan     0.1000    0.0562
-##      5        1.3804             nan     0.1000    0.0573
-##      6        1.3449             nan     0.1000    0.0451
-##      7        1.3159             nan     0.1000    0.0341
-##      8        1.2929             nan     0.1000    0.0353
-##      9        1.2700             nan     0.1000    0.0349
-##     10        1.2473             nan     0.1000    0.0282
-##     20        1.0901             nan     0.1000    0.0159
-##     40        0.9210             nan     0.1000    0.0089
-##     60        0.8154             nan     0.1000    0.0069
-##     80        0.7377             nan     0.1000    0.0045
-##    100        0.6726             nan     0.1000    0.0032
-##    120        0.6224             nan     0.1000    0.0038
-##    140        0.5763             nan     0.1000    0.0028
-##    150        0.5556             nan     0.1000    0.0017
-## 
-## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.1916
-##      2        1.4852             nan     0.1000    0.1320
-##      3        1.3991             nan     0.1000    0.1093
-##      4        1.3303             nan     0.1000    0.0815
-##      5        1.2769             nan     0.1000    0.0724
-##      6        1.2303             nan     0.1000    0.0732
-##      7        1.1848             nan     0.1000    0.0607
-##      8        1.1462             nan     0.1000    0.0510
-##      9        1.1133             nan     0.1000    0.0467
-##     10        1.0833             nan     0.1000    0.0432
-##     20        0.8804             nan     0.1000    0.0198
-##     40        0.6771             nan     0.1000    0.0088
-##     60        0.5494             nan     0.1000    0.0061
-##     80        0.4591             nan     0.1000    0.0046
-##    100        0.3948             nan     0.1000    0.0047
-##    120        0.3441             nan     0.1000    0.0031
-##    140        0.3013             nan     0.1000    0.0037
-##    150        0.2828             nan     0.1000    0.0019
-## 
-## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.2327
-##      2        1.4599             nan     0.1000    0.1613
-##      3        1.3575             nan     0.1000    0.1207
-##      4        1.2797             nan     0.1000    0.1134
-##      5        1.2093             nan     0.1000    0.0823
-##      6        1.1566             nan     0.1000    0.0750
-##      7        1.1078             nan     0.1000    0.0673
-##      8        1.0645             nan     0.1000    0.0737
-##      9        1.0189             nan     0.1000    0.0571
-##     10        0.9837             nan     0.1000    0.0458
-##     20        0.7489             nan     0.1000    0.0224
-##     40        0.5239             nan     0.1000    0.0102
-##     60        0.4046             nan     0.1000    0.0084
-##     80        0.3213             nan     0.1000    0.0059
-##    100        0.2612             nan     0.1000    0.0027
-##    120        0.2172             nan     0.1000    0.0027
-##    140        0.1820             nan     0.1000    0.0015
-##    150        0.1690             nan     0.1000    0.0009
-## 
-## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.1276
-##      2        1.5235             nan     0.1000    0.0860
-##      3        1.4656             nan     0.1000    0.0674
-##      4        1.4194             nan     0.1000    0.0557
-##      5        1.3838             nan     0.1000    0.0502
-##      6        1.3511             nan     0.1000    0.0383
-##      7        1.3250             nan     0.1000    0.0424
-##      8        1.2982             nan     0.1000    0.0353
-##      9        1.2749             nan     0.1000    0.0319
-##     10        1.2552             nan     0.1000    0.0267
-##     20        1.1023             nan     0.1000    0.0166
-##     40        0.9322             nan     0.1000    0.0095
-##     60        0.8256             nan     0.1000    0.0070
-##     80        0.7460             nan     0.1000    0.0037
-##    100        0.6826             nan     0.1000    0.0029
-##    120        0.6309             nan     0.1000    0.0026
-##    140        0.5866             nan     0.1000    0.0025
-##    150        0.5661             nan     0.1000    0.0021
-## 
-## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.1857
-##      2        1.4873             nan     0.1000    0.1295
-##      3        1.4039             nan     0.1000    0.1034
-##      4        1.3363             nan     0.1000    0.0782
-##      5        1.2856             nan     0.1000    0.0713
-##      6        1.2406             nan     0.1000    0.0769
-##      7        1.1938             nan     0.1000    0.0542
-##      8        1.1582             nan     0.1000    0.0523
-##      9        1.1245             nan     0.1000    0.0438
-##     10        1.0975             nan     0.1000    0.0435
-##     20        0.8908             nan     0.1000    0.0210
-##     40        0.6856             nan     0.1000    0.0116
-##     60        0.5614             nan     0.1000    0.0048
-##     80        0.4698             nan     0.1000    0.0070
-##    100        0.4009             nan     0.1000    0.0033
-##    120        0.3493             nan     0.1000    0.0029
-##    140        0.3054             nan     0.1000    0.0011
-##    150        0.2867             nan     0.1000    0.0014
-## 
-## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.2437
-##      2        1.4567             nan     0.1000    0.1550
-##      3        1.3567             nan     0.1000    0.1244
-##      4        1.2769             nan     0.1000    0.1067
-##      5        1.2086             nan     0.1000    0.0810
-##      6        1.1568             nan     0.1000    0.0808
-##      7        1.1069             nan     0.1000    0.0579
-##      8        1.0683             nan     0.1000    0.0536
-##      9        1.0313             nan     0.1000    0.0587
-##     10        0.9928             nan     0.1000    0.0495
-##     20        0.7638             nan     0.1000    0.0226
-##     40        0.5312             nan     0.1000    0.0147
-##     60        0.4057             nan     0.1000    0.0062
-##     80        0.3228             nan     0.1000    0.0045
-##    100        0.2638             nan     0.1000    0.0027
-##    120        0.2165             nan     0.1000    0.0024
-##    140        0.1818             nan     0.1000    0.0017
-##    150        0.1690             nan     0.1000    0.0012
-## 
-## Iter   TrainDeviance   ValidDeviance   StepSize   Improve
-##      1        1.6094             nan     0.1000    0.2397
-##      2        1.4578             nan     0.1000    0.1641
-##      3        1.3559             nan     0.1000    0.1250
-##      4        1.2774             nan     0.1000    0.1019
-##      5        1.2127             nan     0.1000    0.0894
-##      6        1.1543             nan     0.1000    0.0799
-##      7        1.1025             nan     0.1000    0.0626
-##      8        1.0609             nan     0.1000    0.0563
-##      9        1.0256             nan     0.1000    0.0522
-##     10        0.9926             nan     0.1000    0.0529
-##     20        0.7561             nan     0.1000    0.0229
-##     40        0.5343             nan     0.1000    0.0116
-##     60        0.4027             nan     0.1000    0.0050
-##     80        0.3245             nan     0.1000    0.0024
-##    100        0.2678             nan     0.1000    0.0022
-##    120        0.2229             nan     0.1000    0.0017
-##    140        0.1886             nan     0.1000    0.0013
-##    150        0.1756             nan     0.1000    0.0017</code></pre>
+model_gbm &lt;- train(classe ~ ., method = 'gbm',data = training,trControl = ctrl, verbose = F)</code></pre>
 </div>
 <div id="results" class="section level2">
 <h2>Results</h2>
@@ -604,8 +285,8 @@ acc_gbm &lt;- matrix_gbm$overall[1]</code></pre>
 imp_rf &lt;- varImp(model_rf)$importance</code></pre>
 <p>Variables importance with Random Forests: <img src="data:image/png;base64,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" width="672" /></p>
 </div>
-<div id="expected-out-of-sample-error" class="section level2">
-<h2>Expected out of sample error</h2>
+<div id="validation" class="section level2">
+<h2>Validation</h2>
 <p>The accuracy of the Random Forests model in the validation set is:</p>
 <pre class="r"><code># Validation
 pred_out &lt;- predict(model_rf, validation)
@@ -613,6 +294,37 @@ matrix_out &lt;- confusionMatrix(validation$classe, pred_out)
 acc_out &lt;- matrix_out$overall[1]</code></pre>
 <pre><code>##  Accuracy 
 ## 0.9915881</code></pre>
+</div>
+<div id="expected-out-of-sample-error" class="section level2">
+<h2>Expected out of sample error</h2>
+<p>The out of sample expected error using the test sample is:</p>
+<pre><code>##   Accuracy 
+## 0.00841193</code></pre>
+<p>The out of sample error estimated using cross-validation is:</p>
+<pre class="r"><code># OOB estimate of error
+model_rf$finalModel</code></pre>
+<pre><code>## 
+## Call:
+##  randomForest(x = x, y = y, mtry = param$mtry) 
+##                Type of random forest: classification
+##                      Number of trees: 500
+## No. of variables tried at each split: 2
+## 
+##         OOB estimate of  error rate: 0.91%
+## Confusion matrix:
+##      A    B    C    D    E class.error
+## A 3344    2    0    1    1 0.001194743
+## B   21 2250    8    0    0 0.012724879
+## C    0   21 2030    3    0 0.011684518
+## D    0    0   38 1890    2 0.020725389
+## E    0    0    3    7 2155 0.004618938</code></pre>
+</div>
+<div id="test-sample-prediction" class="section level2">
+<h2>Test sample prediction</h2>
+<p>The prediction for the testing dataset using the Random Forests model is:</p>
+<pre class="r"><code>predict(model_rf, plm_test)</code></pre>
+<pre><code>##  [1] B A B A A E D B A A B C B A E E A B B B
+## Levels: A B C D E</code></pre>
 </div>
 
 

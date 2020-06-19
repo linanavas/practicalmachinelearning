@@ -83,7 +83,7 @@ Random Forests and Gradient Boosting Machines
 set.seed(5678)
 ctrl <- trainControl(method = 'cv', number = 5)
 model_rf <- train(classe ~ ., method = 'rf',data = training,trControl = ctrl)
-model_gbm <- train(classe ~ ., method = 'gbm',data = training,trControl = ctrl)
+model_gbm <- train(classe ~ ., method = 'gbm',data = training,trControl = ctrl, verbose = F)
 ```
 
 ## Results
@@ -131,7 +131,6 @@ The most important variables in the prediction are roll_belt and yaw_belt.
 # Var importance
 imp_rf <- varImp(model_rf)$importance
 ```
-
 Variables importance with Random Forests:
 ```{r, echo=FALSE}
 imp_rf <- imp_rf %>% 
@@ -150,7 +149,7 @@ fig <- ggplot(aes(y = Variable, x = Overall), data = imp_rf %>%
 fig
 ```
 
-## Expected out of sample error
+## Validation
 
 The accuracy of the Random Forests model in the validation set is:
 
@@ -164,6 +163,21 @@ acc_out <- matrix_out$overall[1]
 ```{r, echo=FALSE}
 acc_out
 ```
+
+## Expected out of sample error
+
+The out of sample expected error using the test sample is:
+
+```{r, echo=FALSE}
+1-acc_out
+```
+The out of sample error estimated using cross-validation is:
+
+```{r, echo=TRUE}
+# OOB estimate of error
+model_rf$finalModel
+```
+
 ## Test sample prediction
 The prediction for the testing dataset using the Random Forests model is:
 
