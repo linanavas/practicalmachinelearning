@@ -100,3 +100,11 @@ save(list = c('tab_rf','acc_rf',
               'tab_out','acc_out',
               'fig'), 
               file = 'Results.RData')
+
+# Preditc test sample
+
+pred_test <- predict(model_rf, plm_test)
+
+response <- plm_test %>% 
+  select(problem_id) %>% 
+  mutate(classe_pred = pred_test)

@@ -1,6 +1,6 @@
 ---
 title: "Practical Machine Learning Project"
-author: "Lina"
+author: "Lina Navas"
 date: "17 de junio de 2020"
 output: html_document
 ---
@@ -71,7 +71,7 @@ acc_gbm
 
 The resuls from the Random Forests model are slightly better than those
 from the Gradient Boosting Machines. 
-The more important variables in the prediction are roll_belt and yaw_belt.
+The most important variables in the prediction are roll_belt and yaw_belt.
 
 Variables importance with Random Forests:
 ```{r, echo=FALSE}
